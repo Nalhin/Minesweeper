@@ -1,0 +1,8 @@
+export const fieldTypes = {
+  EMPTY: "EMPTY",
+  FLAG: "FLAG",
+  QUESTION_MARK: "QUESTION_MARK",
+  BOMB_CLICKED: "BOMB_CLICKED",
+  BOMB_WRONG: "BOMB_WRONG",
+  BOMB: "BOMB"
+};

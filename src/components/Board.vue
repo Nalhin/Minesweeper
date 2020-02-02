@@ -1,15 +1,49 @@
 <template>
-  <div>{{ msg }}</div>
+  <div class="board">
+    <div class="row" v-for="row in board" :key="row[0].x">
+      <Cell
+        :isClicked="cell.isClicked"
+        :fieldState="cell.fieldState"
+        v-for="cell in row"
+        :key="cell.x + '#' + cell.y"
+        :x="cell.x"
+        :y="cell.y"
+        :bombsNearby="cell.bombsNearby"
+        @cell-clicked="cellClicked"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
+import { populateBoard } from "../utils/populateBoard";
+import Cell from "./Cell";
+
+const SIZE = 10;
+const NUMBER_OF_BOMBS = 20;
+
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String
+  name: "Board",
+  components: { Cell },
+  props: {},
+  data() {
+    return { board: populateBoard(SIZE, NUMBER_OF_BOMBS) };
+  },
+  methods: {
+    cellClicked({ x, y }) {
+      this.board[x][y].isClicked = true;
+    }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.board {
+}
+
+.row {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+</style>
