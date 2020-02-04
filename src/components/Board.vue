@@ -20,20 +20,45 @@
 <script>
 import { populateBoard } from '../utils/populateBoard';
 import Cell from './Cell';
-
-const SIZE = 10;
-const NUMBER_OF_BOMBS = 20;
+import { fieldTypes } from '../constants/fieldTypes';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Board',
   components: { Cell },
+  props: {
+    shouldClickPlaceFlags: Boolean,
+  },
+  computed: {
+    ...mapGetters({ gameSettings: 'game/getSettings' }),
+  },
   data() {
-    return { board: populateBoard(SIZE, NUMBER_OF_BOMBS) };
+    return {
+      board: [[]],
+    };
   },
   methods: {
     cellClicked({ x, y }) {
-      this.board[x][y].isClicked = true;
+      if (this.shouldClickPlaceFlags) {
+        this.board[x][y].fieldState = fieldTypes.FLAG;
+      } else {
+        this.board[x][y].isClicked = true;
+      }
     },
+  },
+  watch: {
+    gameSettings() {
+      this.board = populateBoard(
+        { width: this.gameSettings.width, height: this.gameSettings.height },
+        this.gameSettings.mines,
+      );
+    },
+  },
+  mounted() {
+    this.board = populateBoard(
+      { width: this.gameSettings.width, height: this.gameSettings.height },
+      this.gameSettings.mines,
+    );
   },
 };
 </script>
@@ -42,6 +67,9 @@ export default {
 .wrapper {
   user-select: none;
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 .board {

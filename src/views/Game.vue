@@ -1,16 +1,26 @@
 <template>
   <div>
-    <NumberDisplay number="1" />
+    <NumberDisplay :number="remainingBombs" />
     <Timer />
-    <button @click="addModal">Settings</button>
+    <b-switch v-model="shouldClickPlaceFlags">
+      Place flags?
+    </b-switch>
+    <b-button type="is-primary" @click="addModal">Settings</b-button>
     <GameStatus />
-    <Modal v-if="isSettingsModalOpen" @close-modal="closeModal">
+    <b-modal
+      :active="isSettingsModalOpen"
+      has-modal-card
+      trap-focus
+      aria-role="dialog"
+      aria-modal
+      :on-cancel="closeModal"
+    >
       <GameSettings
         @save-settings="saveSettings"
         :difficulty="gameDifficulty"
       />
-    </Modal>
-    <Board />
+    </b-modal>
+    <Board :shouldClickPlaceFlags="shouldClickPlaceFlags" />
   </div>
 </template>
 
@@ -22,14 +32,14 @@ import GameSettings from '../components/GameSettings';
 import Timer from '../components/Timer';
 import { modalTypes } from '../constants/modalTypes';
 import { mapGetters } from 'vuex';
-import Modal from '../components/Modal';
 
 export default {
   name: 'Game',
-  components: { Modal, GameSettings, GameStatus, NumberDisplay, Board, Timer },
+  components: { GameSettings, GameStatus, NumberDisplay, Board, Timer },
   computed: {
     ...mapGetters({
       isModalOpen: 'modal/isModalOpen',
+      remainingBombs: 'game/getRemainingBombs',
     }),
     isSettingsModalOpen() {
       return this.isModalOpen(modalTypes.SETTINGS);
@@ -37,6 +47,9 @@ export default {
     gameDifficulty() {
       return this.$store.state.game.settings.difficulty;
     },
+  },
+  data() {
+    return { shouldClickPlaceFlags: true };
   },
   methods: {
     addModal() {
@@ -50,6 +63,10 @@ export default {
         difficulty,
       });
       this.closeModal();
+      this.$buefy.notification.open({
+        message: 'Settings saved!',
+        type: 'is-success',
+      });
     },
   },
 };

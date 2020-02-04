@@ -1,29 +1,31 @@
 <template>
-  <div class="settings-wrapper">
-    <input
-      type="radio"
-      id="beginner"
-      value="beginner"
-      v-model="selectedDifficulty"
-    />
-    <label for="beginner">Beginner</label>
-    <input
-      type="radio"
-      id="intermediate"
-      value="intermediate"
-      v-model="selectedDifficulty"
-    />
-    <label for="intermediate">Intermediate</label>
-    <input
-      type="radio"
-      id="expert"
-      value="expert"
-      v-model="selectedDifficulty"
-    />
-    <label for="expert">Expert</label>
-    <button @click="$emit('save-settings', { difficulty: selectedDifficulty })">
-      Set settings
-    </button>
+  <div class="modal-card" style="width: auto">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Game Settings</p>
+    </header>
+    <section class="modal-card-body">
+      <div class="field">
+        <b-radio native-value="beginner" v-model="selectedDifficulty">
+          Beginner
+        </b-radio>
+      </div>
+      <div class="field">
+        <b-radio native-value="intermediate" v-model="selectedDifficulty">
+          Intermediate
+        </b-radio>
+      </div>
+      <div class="field">
+        <b-radio value="expert" v-model="selectedDifficulty"> Expert</b-radio>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <b-button
+        type="is-primary"
+        @click="$emit('save-settings', { difficulty: selectedDifficulty })"
+      >
+        Set settings
+      </b-button>
+    </footer>
   </div>
 </template>
 

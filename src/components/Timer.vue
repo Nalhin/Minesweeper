@@ -7,6 +7,9 @@ import NumberDisplay from './NumberDisplay';
 export default {
   components: { NumberDisplay },
   name: 'Timer',
+  props: {
+    isRunning: Boolean,
+  },
   data() {
     return {
       intervalId: '',
@@ -15,6 +18,7 @@ export default {
   },
   methods: {
     startTimer() {
+      this.timer = 0;
       this.invervalId = setInterval(() => {
         this.timer++;
       }, 1000);
@@ -26,8 +30,14 @@ export default {
       }
     },
   },
-  mounted() {
-    this.startTimer();
+  watch: {
+    isRunning() {
+      if (this.isRunning) {
+        this.startTimer();
+      } else {
+        this.stopTimer();
+      }
+    },
   },
   beforeDestroy() {
     this.stopTimer();

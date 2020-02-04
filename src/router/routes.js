@@ -5,6 +5,6 @@ export const routes = [
   {
     path: '/score',
     name: 'scores',
-    component: () => import('../views/Scores'),
+    component: () => import('../views/ScoresPage'),
   },
 ];

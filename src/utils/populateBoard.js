@@ -1,23 +1,23 @@
 import { fieldTypes } from '../constants/fieldTypes';
-import { isWithinBounds } from './isWithinBounds';
 import { dxdy } from '../constants/dxdy';
+import { isWithinBounds } from './isWithinBounds';
 
-export function populateBoard(size, numberOfBombs) {
-  const board = generateEmptyBoard(size);
-  const bombPositions = generateBombPosition(size, numberOfBombs);
+export function populateBoard({ width, height }, numberOfBombs) {
+  const board = generateEmptyBoard({ width, height });
+  const bombPositions = generateBombPosition({ width, height }, numberOfBombs);
   bombPositions.forEach(position => {
-    const x = Math.floor(position / size);
-    const y = position % size;
+    const x = Math.floor(position / width);
+    const y = position % height;
     board[x][y].fieldState = fieldTypes.BOMB;
-    addBombToNeightbours(board, size, { x, y });
+    addBombToNeighbours(board, { width, height }, { x, y });
   });
 
   return board;
 }
 
-function generateEmptyBoard(size) {
-  return [...Array(size)].map((xEl, x) =>
-    [...Array(size)].map((yEl, y) => ({
+function generateEmptyBoard({ width, height }) {
+  return [...Array(height)].map((xEl, x) =>
+    [...Array(width)].map((yEl, y) => ({
       x,
       y,
       fieldState: fieldTypes.EMPTY,
@@ -27,8 +27,8 @@ function generateEmptyBoard(size) {
   );
 }
 
-function generateBombPosition(size, numberOfBombs) {
-  const nums = [...Array(size * size).keys()];
+function generateBombPosition({ width, height }, numberOfBombs) {
+  const nums = [...Array(width * height).keys()];
   const randomNumbers = [];
 
   while (randomNumbers.length < numberOfBombs - 1) {
@@ -38,11 +38,11 @@ function generateBombPosition(size, numberOfBombs) {
   return randomNumbers;
 }
 
-function addBombToNeightbours(board, size, { x, y }) {
+function addBombToNeighbours(board, { width, height }, { x, y }) {
   dxdy.forEach(increase => {
     const newX = x + increase.dx;
     const newY = y + increase.dy;
-    if (isWithinBounds(newX, size) && isWithinBounds(newY, size)) {
+    if (isWithinBounds(newX, height) && isWithinBounds(newY, width)) {
       board[newX][newY].bombsNearby++;
     }
   });

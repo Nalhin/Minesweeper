@@ -1,3 +1,8 @@
 export const scoreState = {
-  scores: [],
+  scores: {
+    beginner: {},
+    intermediate: {},
+    expert: {},
+  },
+  isLoading: false,
 };

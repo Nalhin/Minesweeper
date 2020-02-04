@@ -1,12 +1,15 @@
 import { apiUrl } from '../url';
 import axios from 'axios';
 
-const fetchGetScores = () => axios.get(`${apiUrl}/scores`);
+const fetchGetScore = difficulty =>
+  axios.get(
+    `${apiUrl}/scores/${difficulty}.json?orderBy="score"&limitToFirst=20`,
+  );
 
 const fetchSaveScore = ({ name, score, difficulty }) =>
-  axios.put(`${apiUrl}/scores/${difficulty}`, { name, score });
+  axios.post(`${apiUrl}/scores/${difficulty}.json`, { name, score });
 
 export default {
-  fetchGetScores,
+  fetchGetScore,
   fetchSaveScore,
 };

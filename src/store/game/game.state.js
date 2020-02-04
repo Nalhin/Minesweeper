@@ -1,11 +1,10 @@
 import { gamePhases } from '../../constants/gamePhases';
+import { gameDifficulties } from '../../constants/gameDifficulties';
 
 export const gameState = {
   settings: {
-    difficulty: '',
-    width: 0,
-    height: 0,
-    bombs: 0,
+    ...gameDifficulties.beginner,
   },
   gamePhase: gamePhases.NOT_STARTED,
+  flagsPlaced: 0,
 };

@@ -5,7 +5,9 @@
     @click="onClick"
   >
     <div class="bomb-icon" v-if="showBomb" />
-    <div class="nearby-bombs" v-if="showNearbyBombs">{{ bombsNearby }}</div>
+    <div class="nearby-bombs" v-else-if="showNearbyBombs">
+      {{ bombsNearby }}
+    </div>
   </div>
 </template>
 
@@ -27,10 +29,10 @@ export default {
     },
   },
   computed: {
-    stateClass: function() {
+    stateClass() {
       return this.fieldState.replace('_', '-').toLowerCase();
     },
-    showBomb: function() {
+    showBomb() {
       if (!this.isClicked) {
         return false;
       }
@@ -40,7 +42,7 @@ export default {
         this.fieldState === fieldTypes.BOMB_WRONG
       );
     },
-    showNearbyBombs: function() {
+    showNearbyBombs() {
       return this.isClicked && !this.showBomb && !!this.bombsNearby;
     },
   },
@@ -69,6 +71,9 @@ export default {
   justify-items: center;
 }
 
+.flag {
+  background: red;
+}
 .clicked {
   border-color: transparent;
 }
