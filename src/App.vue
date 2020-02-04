@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <Game />
+    <Navigation />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Game from "./components/BGame.vue";
+import Navigation from './components/Navigation';
 
 export default {
-  name: "app",
-  components: {
-    Game
-  }
+  components: { Navigation },
+  name: 'app',
 };
 </script>
 

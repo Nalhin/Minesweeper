@@ -10,25 +10,25 @@
 </template>
 
 <script>
-import { fieldTypes } from "../constants/fieldTypes";
+import { fieldTypes } from '../constants/fieldTypes';
 
 export default {
-  name: "Cell",
+  name: 'Cell',
   props: {
     fieldState: String,
     isClicked: Boolean,
     x: Number,
     y: Number,
-    bombsNearby: Number
+    bombsNearby: Number,
   },
   methods: {
     onClick() {
-      this.$emit("cell-clicked", { x: this.x, y: this.y });
-    }
+      this.$emit('cell-clicked', { x: this.x, y: this.y });
+    },
   },
   computed: {
     stateClass: function() {
-      return this.fieldState.replace("_", "-").toLowerCase();
+      return this.fieldState.replace('_', '-').toLowerCase();
     },
     showBomb: function() {
       if (!this.isClicked) {
@@ -42,8 +42,8 @@ export default {
     },
     showNearbyBombs: function() {
       return this.isClicked && !this.showBomb && !!this.bombsNearby;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -55,7 +55,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 700px;
+  font-weight: 700;
 }
 
 .cell {

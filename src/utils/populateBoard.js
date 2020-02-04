@@ -1,6 +1,6 @@
-import { fieldTypes } from "../constants/fieldTypes";
-import { isWithinBounds } from "./isWithinBounds";
-import { dxdy } from "../constants/dxdy";
+import { fieldTypes } from '../constants/fieldTypes';
+import { isWithinBounds } from './isWithinBounds';
+import { dxdy } from '../constants/dxdy';
 
 export function populateBoard(size, numberOfBombs) {
   const board = generateEmptyBoard(size);
@@ -22,8 +22,8 @@ function generateEmptyBoard(size) {
       y,
       fieldState: fieldTypes.EMPTY,
       isClicked: false,
-      bombsNearby: 0
-    }))
+      bombsNearby: 0,
+    })),
   );
 }
 
