@@ -4,7 +4,7 @@ export const modalActions = {
       commit('addModal', modal);
     }
   },
-  CLOSE_MODAL({ commit }, modalType) {
-    commit('closeModal', modalType);
+  CLOSE_MODAL({ commit }, { type }) {
+    commit('closeModal', type);
   },
 };

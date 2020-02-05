@@ -1,12 +1,14 @@
 <template>
   <div class="modal-card" style="width: auto">
     <header class="modal-card-head">
-      <p class="modal-card-title">Game Settings</p>
+      <p class="modal-card-title">Game Difficulty</p>
     </header>
     <section class="modal-card-body">
       <div class="field">
         <b-radio native-value="beginner" v-model="selectedDifficulty">
-          Beginner
+          <div>
+            Beginner
+          </div>
         </b-radio>
       </div>
       <div class="field">
@@ -15,7 +17,9 @@
         </b-radio>
       </div>
       <div class="field">
-        <b-radio value="expert" v-model="selectedDifficulty"> Expert</b-radio>
+        <b-radio native-value="expert" v-model="selectedDifficulty">
+          Expert</b-radio
+        >
       </div>
     </section>
     <footer class="modal-card-foot">
@@ -36,7 +40,7 @@ export default {
     difficulty: String,
   },
   data() {
-    return { selectedDifficulty: '' };
+    return { selectedDifficulty: 'beginner' };
   },
   mounted() {
     this.selectedDifficulty = this.difficulty;
@@ -44,9 +48,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.settings-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style scoped></style>

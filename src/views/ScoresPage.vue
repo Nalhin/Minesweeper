@@ -1,22 +1,16 @@
 <template>
   <div>
-    <div class="wrapper">
-      <Scores
-        :title="'Beginner'"
-        :scores="scores.beginner"
-        :isLoading="isLoading"
-      />
-      <Scores
-        :title="'Intermediate'"
-        :scores="scores.intermediate"
-        :isLoading="isLoading"
-      />
-      <Scores
-        :title="'Expert'"
-        :scores="scores.expert"
-        :isLoading="isLoading"
-      />
-    </div>
+    <b-tabs position="is-centered" class="block">
+      <b-tab-item label="Beginner">
+        <Scores :scores="scores.beginner" :isLoading="isLoading" />
+      </b-tab-item>
+      <b-tab-item label="Intermediate">
+        <Scores :scores="scores.intermediate" :isLoading="isLoading" />
+      </b-tab-item>
+      <b-tab-item label="Expert">
+        <Scores :scores="scores.expert" :isLoading="isLoading" />
+      </b-tab-item>
+    </b-tabs>
   </div>
 </template>
 

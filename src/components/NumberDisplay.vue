@@ -18,8 +18,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .clock {
   font-family: 'Orbitron', sans-serif;
+  font-weight: $font-weight-bold;
+  @include tablet {
+    font-size: $font-size-larger;
+  }
+  @include desktop {
+    font-size: $font-size-extra-large;
+  }
 }
 </style>

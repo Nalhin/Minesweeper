@@ -1,11 +1,11 @@
 <template>
   <div
     class="cell"
-    :class="[stateClass, { clicked: isClicked }]"
+    :class="[{ clicked: isClicked, 'bomb-clicked': bombClicked }]"
     @click="onClick"
   >
     <div class="bomb-icon" v-if="showBomb" />
-    <div class="nearby-bombs" v-else-if="showNearbyBombs">
+    <div class="nearby-bombs" v-else-if="showNearbyBombs" v-bind:style="color">
       {{ bombsNearby }}
     </div>
   </div>
@@ -13,6 +13,17 @@
 
 <script>
 import { fieldTypes } from '../constants/fieldTypes';
+
+const colors = {
+  1: '#0501FB',
+  2: '#017B00',
+  3: '#FE030D',
+  4: '#00048C',
+  5: '#880008',
+  6: '#00847A',
+  7: '#060606',
+  8: '#818181',
+};
 
 export default {
   name: 'Cell',
@@ -29,8 +40,11 @@ export default {
     },
   },
   computed: {
-    stateClass() {
-      return this.fieldState.replace('_', '-').toLowerCase();
+    color() {
+      return { color: colors[this.bombsNearby] };
+    },
+    bombClicked() {
+      return this.fieldState === fieldTypes.BOMB_CLICKED;
     },
     showBomb() {
       if (!this.isClicked) {
@@ -49,7 +63,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .nearby-bombs {
   font-size: 20px;
   text-align: center;
@@ -61,19 +75,33 @@ export default {
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
-  background: gray;
+  width: 18px;
+  height: 18px;
+  border-width: 3px;
+
+  @include tablet {
+    width: 30px;
+    height: 30px;
+    border-width: 4px;
+  }
+
+  @include desktop {
+    width: 40px;
+    height: 40px;
+    border-width: 5px;
+  }
+
+  background: #7f7f7f;
   border-style: outset;
-  border-width: 5px;
   display: flex;
   align-content: center;
   justify-items: center;
 }
 
-.flag {
+.bomb-clicked {
   background: red;
 }
+
 .clicked {
   border-color: transparent;
 }

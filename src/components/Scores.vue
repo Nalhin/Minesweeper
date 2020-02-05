@@ -1,6 +1,5 @@
 <template functional>
   <div>
-    <h3>{{ props.title }}</h3>
     <b-table :data="props.scores" :loading="props.isLoading">
       <template slot-scope="props">
         <b-table-column label="Position" numeric>
@@ -22,7 +21,6 @@ export default {
   name: 'Scores',
   props: {
     scores: Array,
-    title: String,
     isLoading: Boolean,
   },
 };
@@ -30,6 +28,6 @@ export default {
 
 <style scoped lang="scss">
 .scores {
-  padding: $baseSpace;
+  padding: $space-base;
 }
 </style>

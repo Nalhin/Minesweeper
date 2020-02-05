@@ -5,4 +5,13 @@ export const gameGetters = {
   getRemainingBombs(state) {
     return state.settings.mines - state.flagsPlaced;
   },
+  getBoard(state) {
+    return state.board;
+  },
+  getPhase(state) {
+    return state.phase;
+  },
+  getIsGameWon(state) {
+    return !!state.fieldsRemaining;
+  },
 };

@@ -9,6 +9,7 @@ export default {
   name: 'Timer',
   props: {
     isRunning: Boolean,
+    resetTimer: Boolean,
   },
   data() {
     return {
@@ -18,16 +19,12 @@ export default {
   },
   methods: {
     startTimer() {
-      this.timer = 0;
       this.invervalId = setInterval(() => {
         this.timer++;
       }, 1000);
     },
     stopTimer() {
-      if (this.intervalId) {
-        clearInterval(this.invervalId);
-        this.invervalId = '';
-      }
+      clearInterval(this.invervalId);
     },
   },
   watch: {
@@ -36,6 +33,11 @@ export default {
         this.startTimer();
       } else {
         this.stopTimer();
+      }
+    },
+    resetTimer() {
+      if (this.resetTimer) {
+        this.timer = 0;
       }
     },
   },
