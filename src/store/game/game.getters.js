@@ -12,6 +12,12 @@ export const gameGetters = {
     return state.phase;
   },
   getIsGameWon(state) {
-    return !!state.fieldsRemaining;
+    return !state.fieldsRemaining;
+  },
+  getGameDifficulty(state) {
+    return state.settings.difficulty;
+  },
+  getScore(state) {
+    return state.score;
   },
 };

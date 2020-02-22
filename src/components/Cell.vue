@@ -1,7 +1,13 @@
 <template>
   <div
     class="cell"
-    :class="[{ clicked: isClicked, 'bomb-clicked': bombClicked }]"
+    :class="[
+      {
+        clicked: isClicked,
+        'bomb-clicked': bombClicked,
+        'is-flag': !isClicked && isFlag,
+      },
+    ]"
     @click="onClick"
   >
     <div class="bomb-icon" v-if="showBomb" />
@@ -33,6 +39,7 @@ export default {
     x: Number,
     y: Number,
     bombsNearby: Number,
+    isFlag: Boolean,
   },
   methods: {
     onClick() {
@@ -52,8 +59,7 @@ export default {
       }
       return (
         this.fieldState === fieldTypes.BOMB ||
-        this.fieldState === fieldTypes.BOMB_CLICKED ||
-        this.fieldState === fieldTypes.BOMB_WRONG
+        this.fieldState === fieldTypes.BOMB_CLICKED
       );
     },
     showNearbyBombs() {
@@ -104,6 +110,9 @@ export default {
 
 .clicked {
   border-color: transparent;
+}
+.is-flag {
+  background: blue;
 }
 
 .bomb-icon {

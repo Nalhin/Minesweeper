@@ -5,7 +5,7 @@
     trap-focus
     aria-role="dialog"
     aria-modal
-    :on-cancel="closeModal"
+    :on-cancel="this.closeModal"
   >
     <GameSettings @save-settings="saveSettings" :difficulty="gameDifficulty" />
   </b-modal>
@@ -13,22 +13,20 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { modalTypes } from '../../constants/modalTypes';
-import GameSettings from '../GameSettings';
+import { modalTypes } from '../../../constants/modalTypes';
+import GameSettings from './GameSettings';
+import { modalMixin } from '../modalMixin';
 
 export default {
   name: 'GameSettingsModal',
   components: {
     GameSettings,
   },
-  props: {},
+  mixins: [modalMixin(modalTypes.SETTINGS)],
   computed: {
     ...mapGetters({ gameDifficulty: 'game/getGameDifficulty' }),
   },
   methods: {
-    closeModal() {
-      this.$emit('close-modal', { type: modalTypes.SETTINGS });
-    },
     saveSettings({ difficulty }) {
       this.$store.dispatch('game/CHANGE_SETTINGS', {
         difficulty,
@@ -37,6 +35,7 @@ export default {
       this.$buefy.notification.open({
         message: 'Settings saved!',
         type: 'is-success',
+        position: 'is-bottom',
       });
     },
   },

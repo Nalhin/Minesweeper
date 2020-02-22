@@ -28,4 +28,7 @@ export const gameMutations = {
   setNumberOfFlags(state, number) {
     state.numberOfFlags = number;
   },
+  setScore(state, score) {
+    state.score = score;
+  },
 };

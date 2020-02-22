@@ -10,4 +10,5 @@ export const gameState = {
   flagsPlaced: 0,
   board: [[]],
   fieldsRemaining: 0,
+  score: 0,
 };

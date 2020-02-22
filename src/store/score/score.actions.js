@@ -15,7 +15,10 @@ export const scoreActions = {
     });
     commit('setLoading', false);
   },
-  async SAVE_SCORE(action, score) {
-    await scoreApi.fetchSaveScore(score);
+  async SAVE_SCORE({ rootGetters }, { name }) {
+    const difficulty = rootGetters['game/getGameDifficulty'];
+    const score = rootGetters['game/getScore'];
+    console.log(difficulty, score, name);
+    await scoreApi.fetchSaveScore({ name, difficulty, score });
   },
 };

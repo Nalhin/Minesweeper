@@ -2,13 +2,14 @@
   <div class="board">
     <div class="row" v-for="row in board" :key="row[0] && row[0].x">
       <Cell
-        :isClicked="cell.isClicked"
-        :fieldState="cell.fieldState"
         v-for="cell in row"
         :key="cell.x + '#' + cell.y"
+        :isClicked="cell.isClicked"
+        :fieldState="cell.fieldState"
         :x="cell.x"
         :y="cell.y"
         :bombsNearby="cell.bombsNearby"
+        :isFlag="cell.isFlag"
         @cell-clicked="cellClicked"
       />
     </div>
@@ -20,17 +21,15 @@ import Cell from './Cell';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'Board',
   components: { Cell },
-  props: {
-    shouldClickPlaceFlags: Boolean,
-    isGameOver: Boolean,
-  },
   computed: {
     ...mapGetters({
       gameSettings: 'game/getSettings',
       board: 'game/getBoard',
     }),
+  },
+  created() {
+    this.newGame();
   },
   methods: {
     ...mapActions({
@@ -50,8 +49,10 @@ export default {
       }
     },
   },
-  created() {
-    this.newGame();
+  name: 'Board',
+  props: {
+    isGameOver: Boolean,
+    shouldClickPlaceFlags: Boolean,
   },
 };
 </script>

@@ -5,8 +5,8 @@
 <script>
 import NumberDisplay from './NumberDisplay';
 export default {
-  components: { NumberDisplay },
   name: 'Timer',
+  components: { NumberDisplay },
   props: {
     isRunning: Boolean,
     resetTimer: Boolean,
@@ -16,16 +16,6 @@ export default {
       intervalId: '',
       timer: 0,
     };
-  },
-  methods: {
-    startTimer() {
-      this.invervalId = setInterval(() => {
-        this.timer++;
-      }, 1000);
-    },
-    stopTimer() {
-      clearInterval(this.invervalId);
-    },
   },
   watch: {
     isRunning() {
@@ -43,6 +33,19 @@ export default {
   },
   beforeDestroy() {
     this.stopTimer();
+  },
+  methods: {
+    setScore() {
+      this.$store.dispatch('game/SET_SCORE', { score: this.timer });
+    },
+    startTimer() {
+      this.invervalId = setInterval(() => {
+        this.timer++;
+      }, 1000);
+    },
+    stopTimer() {
+      clearInterval(this.invervalId);
+    },
   },
 };
 </script>

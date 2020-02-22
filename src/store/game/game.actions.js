@@ -46,7 +46,6 @@ export const gameActions = {
     const fields = fieldsToOpen(state.board, { x, y });
     commit('setFieldsRemaining', state.fieldsRemaining - fields.length);
     commit('setClickedForBoardFields', { x, y, fields });
-
     if (getters.getIsGameWon) {
       dispatch('END_GAME');
     }
@@ -63,5 +62,8 @@ export const gameActions = {
       commit('setNumberOfFlags', state.flagsPlaced - 1);
     }
     commit('setChangeFlag', { x, y });
+  },
+  SET_SCORE({ commit }, score) {
+    commit('setScore', score);
   },
 };

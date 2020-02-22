@@ -42,7 +42,7 @@ export default {
   data() {
     return { selectedDifficulty: 'beginner' };
   },
-  mounted() {
+  created() {
     this.selectedDifficulty = this.difficulty;
   },
 };

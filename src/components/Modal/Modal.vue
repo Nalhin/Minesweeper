@@ -15,9 +15,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import GameSettingsModal from './GameSettingsModal';
+import GameSettingsModal from './GameSettings/GameSettingsModal';
 import { modalTypes } from '../../constants/modalTypes';
-import GameWonModal from './GameWonModal';
+import GameWonModal from './GameWon/GameWonModal';
 
 export default {
   name: 'Modal',
